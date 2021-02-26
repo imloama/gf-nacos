@@ -1,3 +1,14 @@
+# HTTP Server
+[server]
+    Address     = ":9000"
+    ServerAgent = "example"
+    LogPath     = "./logs/server"
+
+# Logger.
+[logger]
+    Path   = "./logs/app"
+    Level  = "all"
+    Stdout = true
 
 [nacos]
     AppName = "example"
@@ -5,7 +16,7 @@
     FileExtension = "toml"
     EnableConfig = true
     EnableDiscovery = true
-    AppPort = 8080
+    AppPort = 9000
 
 [nacos.config]
     TimeoutMs = 5000
