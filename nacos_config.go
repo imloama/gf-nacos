@@ -17,10 +17,9 @@ func initConfigService(){
 		DataId: dataId,
 	})
 	if err!=nil{
-		fmt.Errorf("读取nacos配置文件发生错误！%s", err)
+		g.Log().Errorf("读取nacos配置文件发生错误！%s", err)
 	}
-	g.Cfg().Clear()
-	gcfg.SetContent(content)
+	setGcfgContent(content)
 
 	nacosClients.configClient.ListenConfig(vo.ConfigParam{
 		Group: nacosCfg.ConfigGroup,
@@ -31,8 +30,13 @@ func initConfigService(){
 }
 
 func onConfigChange(namespace, group, dataId, data string) {
-	fmt.Printf("nacos config change, namespace=%s, group=%s, dataId=%s, data=%s", namespace, group, dataId, data)
-	gcfg.SetContent(data)
+	g.Log().Printf("nacos config change, namespace=%s, group=%s, dataId=%s, data=%s", namespace, group, dataId, data)
+	setGcfgContent(data)
+}
+
+func setGcfgContent(content string){
+	g.Cfg().Clear()
+	gcfg.SetContent(content)
 }
 
 func RemoveConfigListener(){
@@ -42,6 +46,6 @@ func RemoveConfigListener(){
 		DataId: dataId,
 	})
 	if err!=nil{
-		fmt.Errorf("取消nacos配置监听失败！%s", err)
+		g.Log().Errorf("取消nacos配置监听失败！%s", err)
 	}
 }

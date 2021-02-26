@@ -1,15 +1,14 @@
 package gfnacos
+
 import (
 	"fmt"
 	"github.com/gogf/gf/frame/g"
+	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/clients/config_client"
 	"github.com/nacos-group/nacos-sdk-go/clients/naming_client"
-	"os"
-	"path"
-
-	"github.com/nacos-group/nacos-sdk-go/clients"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/vo"
+	"os"
 )
 
 var nacosCfg *NacosCfg
@@ -88,8 +87,8 @@ const (
 	DEFAULT_CONFIG_GROUP = "public"
 	DEFAULT_FILE_EXTENSION = "toml"
 	DEFAULT_MODE = "dev"
-	DEFAULT_NACOS_CACHE_DIR = "~/nacos/cache"
-	DEFAULT_NACOS
+	DEFAULT_NACOS_CACHE_DIR = "/nacos/cache"
+	DEFAULT_NACOS_LOG_DIR = "./logs/nacos"
 )
 
 func fillDefaults(cfg *NacosCfg) {
@@ -112,18 +111,17 @@ func fillDefaults(cfg *NacosCfg) {
 }
 
 func initClientConfig() {
-	pwd,_ := os.Getwd()
+	homeDir, _ := HomeDir()
 	cfg := nacosCfg.Config
-	// 创建clientConfig
-	cacheDir := path.Join(pwd, getPath(cfg.CacheDir, "./nacos/cache"))
-	logDir   := path.Join(pwd, getPath(cfg.LogDir,"./logs/nacos"))
+	cacheDir := cfg.CacheDir
+	if cacheDir == "" {
+		cacheDir = homeDir + DEFAULT_NACOS_CACHE_DIR
+	}
+	logDir   := cfg.LogDir
+	if logDir == "" {
+		logDir = homeDir + DEFAULT_NACOS_LOG_DIR
+	}
 	cfg.CacheDir = cacheDir
 	cfg.LogDir = logDir
 }
 
-func getPath(pwd,defaultPath string)string{
-	if pwd == "" {
-		return defaultPath
-	}
-	return pwd
-}
