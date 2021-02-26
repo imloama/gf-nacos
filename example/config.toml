@@ -1,0 +1,21 @@
+
+[nacos]
+    AppName = "example"
+    Mode    = "dev"
+    FileExtension = "toml"
+    EnableConfig = true
+    EnableDiscovery = true
+    AppPort = 8080
+
+[nacos.config]
+    TimeoutMs = 5000
+    NotLoadCacheAtStart = true
+    RotateTime = "1h"
+    MaxAge = 3
+    LogLevel = "debug"
+
+[nacos.discovery]
+    Scheme = "http"
+    ContextPath = "nacos"
+    IpAddr = "127.0.0.1"
+    Port  = 8848

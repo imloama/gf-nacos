@@ -39,7 +39,7 @@ type NacosCfg struct {
 
 
 // init
-func Init(){
+func init(){
 	cfg := g.Cfg()
 	nacosCfg = &NacosCfg{
 		//Mode: "dev",
