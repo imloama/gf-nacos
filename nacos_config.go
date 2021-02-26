@@ -2,6 +2,7 @@ package gfnacos
 
 import (
 	"fmt"
+	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/os/gcfg"
 	"github.com/nacos-group/nacos-sdk-go/vo"
 )
@@ -18,6 +19,7 @@ func initConfigService(){
 	if err!=nil{
 		fmt.Errorf("读取nacos配置文件发生错误！%s", err)
 	}
+	g.Cfg().Clear()
 	gcfg.SetContent(content)
 
 	nacosClients.configClient.ListenConfig(vo.ConfigParam{

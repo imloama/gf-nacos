@@ -16,6 +16,6 @@
 
 [nacos.discovery]
     Scheme = "http"
-    ContextPath = "nacos"
+    ContextPath = "/nacos"
     IpAddr = "127.0.0.1"
     Port  = 8848
