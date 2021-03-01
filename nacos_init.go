@@ -1,6 +1,7 @@
 package gfnacos
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gogf/gf/frame/g"
 	"github.com/nacos-group/nacos-sdk-go/clients"
@@ -38,7 +39,7 @@ type NacosCfg struct {
 
 
 // init
-func init(){
+func Init()error{
 	cfg := g.Cfg()
 	nacosCfg = &NacosCfg{
 		//Mode: "dev",
@@ -49,6 +50,8 @@ func init(){
 	cfg.GetStruct("nacos",nacosCfg)
 	fillDefaults(nacosCfg)
 	initClientConfig()
+	jsonb, _ := json.Marshal(nacosCfg)
+	g.Log().Debugf("gf-nacos config: %s", string(jsonb))
 
 	nacosParams := vo.NacosClientParam{
 		ClientConfig:  &nacosCfg.Config,
@@ -60,7 +63,7 @@ func init(){
 		namingClient, err := clients.NewNamingClient(nacosParams)
 		if err!= nil {
 			fmt.Printf("create nacos naming client error! %s", err)
-			panic(err)
+			return err
 		}
 		nacosClients.namingClient = namingClient
 		initDiscoveryService()
@@ -72,14 +75,12 @@ func init(){
 		configClient, err := clients.NewConfigClient(nacosParams)
 		if err!= nil {
 			fmt.Printf("create nacos config client error! %s", err)
-			panic(err)
+			return err
 		}
 		nacosClients.configClient = configClient
 		initConfigService()
 	}
-
-
-
+	return nil
 }
 
 const (
