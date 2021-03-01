@@ -4,9 +4,21 @@
 
 默认使用toml配置文件
 
-假设`config.toml`配置`AppName = "example"`,`Mode= "dev"`,`FileExtension="toml"`
+假设`config.toml`配置
+```
+[nacos]
+    AppName = "example"
+    Mode= "dev"
+    FileExtension="toml"
+```
 那么会去nacos中查询`${AppName}-${Mode}.${FileExtension}`即`example-dev.toml`的配置文件，
-读取内容到覆盖g.Cfg中`gcfg.SetContent(content)`
+读取到配置内容后会覆盖g.Cfg中的内容，调用方法：`gcfg.SetContent(content)`，
+
+注意：***更新前会调用clear()，清理掉内存中之前读取的配置文件***
+
+
+
+
 
 ## 示例 
 
