@@ -35,7 +35,7 @@ func onConfigChange(namespace, group, dataId, data string) {
 }
 
 func setGcfgContent(content string){
-	g.Log().Debugf("got config file content: %s", content)
+	//g.Log().Debugf("got config file content: %s", content)
 	if content!=""{
 		g.Cfg().Clear()
 		gcfg.SetContent(content)

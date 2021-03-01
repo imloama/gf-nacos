@@ -12,17 +12,27 @@
 
 [nacos]
     # 应用标识
-    AppName = "example"
+    AppName                 = "example"
     # 运行模式
-    Mode    = "dev"
+    Mode                    = "dev"
     # 配置文件类型
-    FileExtension = "toml"
+    FileExtension           = "toml"
     # 是否启用nacos作为配置中心
-    EnableConfig = true
+    EnableConfig            = true
     # 是否启用nacos用为服务发现注册中心
-    EnableDiscovery = true
+    EnableDiscovery         = true
     # 应用的监听端口
-    AppPort = 9000
+    AppPort                 = 9000
+    # 配置文件的Group属性，默认为public
+    ConfigGroup             = "public"
+    # 服务注册中的Group属性，默认为DEFAULT_GROUP
+    DiscoveryGroup          = "DEFAULT_GROUP"
+    # 服务器的IP，在gateway中将通过该ip对外提供服务
+    AppIp                   = "172.16.1.106"
+
+# 服务注册时的meta参数，全部自定义
+[nacos.meta]
+    private                 = "false"
 
 # nacos配置中心的配置参数，配置来自：https://github.com/nacos-group/nacos-sdk-go/blob/master/common/constant/config.go的ClientConfig
 [nacos.config]
