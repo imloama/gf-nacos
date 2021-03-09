@@ -5,8 +5,6 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-const Version = "0.0.5"
-
 type ConfigListener func(config string)
 
 var configListener ConfigListener = func(config string) {
