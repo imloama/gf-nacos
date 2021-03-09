@@ -5,8 +5,12 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-type GfNacosPlugin struct {
+type ConfigListener func(config string)
 
+var configListener ConfigListener
+
+type GfNacosPlugin struct {
+	Listener ConfigListener
 }
 
 func (gn GfNacosPlugin)Name()string{
@@ -29,6 +33,7 @@ func (gn GfNacosPlugin)Description()string{
 
 func (gn GfNacosPlugin)Install(s *ghttp.Server)error{
 	fmt.Println("gf-nacos插件正在安装...")
+	configListener = gn.Listener
 	return Init()
 }
 

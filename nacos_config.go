@@ -7,7 +7,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/vo"
 )
 
-func initConfigService(){
+func initConfigService(listener ConfigListener) {
 	if !nacosCfg.EnableConfig {
 		return
 	}
@@ -39,6 +39,9 @@ func setGcfgContent(content string){
 	if content!=""{
 		g.Cfg().Clear()
 		gcfg.SetContent(content)
+		if configListener!=nil{
+			configListener(content)
+		}
 	}
 }
 
