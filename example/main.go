@@ -12,6 +12,10 @@ func main(){
 	s.BindHandler("/", func(r *ghttp.Request) {
 		r.Response.Write("hello, nacos!")
 	})
-	s.Plugin(&gfnacos.GfNacosPlugin{})
+	s.Plugin(&gfnacos.GfNacosPlugin{
+		Listener: func(config string) {
+			g.Log().Println("配置文件发生了更新！")
+		},
+	})
 	s.Run()
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/vo"
 )
 
-func initConfigService(listener ConfigListener) {
+func initConfigService() {
 	if !nacosCfg.EnableConfig {
 		return
 	}

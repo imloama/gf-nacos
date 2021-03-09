@@ -7,7 +7,10 @@ import (
 
 type ConfigListener func(config string)
 
-var configListener ConfigListener
+var configListener ConfigListener = func(config string) {
+
+}
+
 
 type GfNacosPlugin struct {
 	Listener ConfigListener
@@ -34,6 +37,7 @@ func (gn GfNacosPlugin)Description()string{
 func (gn GfNacosPlugin)Install(s *ghttp.Server)error{
 	fmt.Println("gf-nacos插件正在安装...")
 	configListener = gn.Listener
+	//fmt.Printf("configListener: %s", configListener)
 	return Init()
 }
 
@@ -45,6 +49,3 @@ func (gn GfNacosPlugin)Remove()error{
 	fmt.Println("gf-nacos插件被移除。")
 	return nil
 }
-
-
-
