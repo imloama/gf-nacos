@@ -1,8 +1,8 @@
 # goframe nacos plugin
 
-使用nacos作为配置中心和服务注册管理
+使用nacos作为配置中心和服务注册管理，开发过程中，可能变动较大
 
-`version:0.0.7` 
+`version:0.0.8` 
 
 默认使用toml配置文件
 

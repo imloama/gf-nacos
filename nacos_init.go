@@ -126,3 +126,24 @@ func initClientConfig() {
 	cfg.LogDir = logDir
 }
 
+func (client *NacosClients)GetNamingClient() naming_client.INamingClient{
+	return client.namingClient
+}
+
+func (client *NacosClients)GetConfigClient() config_client.IConfigClient{
+	return client.configClient
+}
+
+func GetNacosClients() *NacosClients {
+	return nacosClients
+}
+
+// 获得nacos的INamingClient
+func GetNamingClient() naming_client.INamingClient {
+	return nacosClients.namingClient
+}
+
+// 获得nacos的IConfigClient
+func GetConfigClient() config_client.IConfigClient {
+	return nacosClients.configClient
+}
